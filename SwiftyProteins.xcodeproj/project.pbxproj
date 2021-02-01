@@ -14,6 +14,8 @@
 		00879DE625C2E20C00C7DFC3 /* LoginVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE425C2E20C00C7DFC3 /* LoginVC.storyboard */; };
 		00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE725C2E20E00C7DFC3 /* Assets.xcassets */; };
 		00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE925C2E20E00C7DFC3 /* LaunchScreen.storyboard */; };
+		2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988A9ED25C43CD100EB05A8 /* TestViewController.swift */; };
+		2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		00879DE725C2E20E00C7DFC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00879DEA25C2E20E00C7DFC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00879DEC25C2E20E00C7DFC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,8 @@
 			children = (
 				00879DE225C2E20C00C7DFC3 /* LoginVC.swift */,
 				00879DE425C2E20C00C7DFC3 /* LoginVC.storyboard */,
+				2988A9ED25C43CD100EB05A8 /* TestViewController.swift */,
+				2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */,
 			);
 			name = LoginVC;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 				00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */,
 				00663F4525C2E4EF00D36116 /* ProteinListVC.storyboard in Resources */,
 				00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */,
+				2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */,
 				00879DE625C2E20C00C7DFC3 /* LoginVC.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +175,7 @@
 			files = (
 				00663F4725C2E50B00D36116 /* ProteinListVC.swift in Sources */,
 				00879DE325C2E20C00C7DFC3 /* LoginVC.swift in Sources */,
+				2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */,
 				00879DDF25C2E20C00C7DFC3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

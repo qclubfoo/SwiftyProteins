@@ -9,21 +9,29 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = LoginVC.storyboardInstance()
+        window?.rootViewController = TestViewController.storyboardInstance()
         window?.makeKeyAndVisible()
-        
+        showLoginVC()
         return true
     }
-
-
-
-
 }
 
+extension AppDelegate: UIWindowSceneDelegate  {
+    
+    private func showLoginVC() {
+        let loginVC = LoginVC.storyboardInstance()
+        loginVC.modalPresentationStyle = .overFullScreen
+        window?.rootViewController?.present(loginVC, animated: true)
+        window?.makeKeyAndVisible()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        showLoginVC()
+    }
+}

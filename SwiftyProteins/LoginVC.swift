@@ -7,14 +7,36 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class LoginVC: UIViewController {
 
+    @IBAction func pressSignIn(_ sender: UIButton) {
+        let context = LAContext()
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: "Please authenticate to proceed.") { [weak self] (success, error) in
+                if success {
+                    DispatchQueue.main.async {
+                        // Что-то сделать
+                        print("HELLO")
+                        self?.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    guard let error = error else { return }
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
+            print("Not biometry")
+            //self.dismiss(animated: true, completion: nil)
+            // no biometry
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
 }
 
 extension LoginVC {
@@ -25,4 +47,3 @@ extension LoginVC {
         return vc
     }
 }
-
