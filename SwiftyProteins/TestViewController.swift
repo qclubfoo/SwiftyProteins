@@ -31,7 +31,7 @@ class TestViewController: UIViewController {
         setScene()
         //createObject()
         //createPlane()
-        createBall()
+        //createBall()
         //createCylinder()
         createAtoms()
         createLinks()
@@ -46,7 +46,7 @@ class TestViewController: UIViewController {
         scnView.scene = scnScene
         
         scnView.showsStatistics = true              // Отображение статичтики
-        scnView.backgroundColor = .black
+        scnView.backgroundColor = .darkGray
         scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
         //scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
     }
@@ -61,9 +61,9 @@ class TestViewController: UIViewController {
         cameraNode.camera?.usesOrthographicProjection = true
         cameraNode.camera?.orthographicScale = 10
         cameraNode.position = SCNVector3Make(20, 20, 20)
-        cameraNode.eulerAngles = SCNVector3Make(0, 0, 0)
-        let constrain = SCNLookAtConstraint(target: ball)
-        constrain.isGimbalLockEnabled = true
+        let centr = SCNNode()
+        centr.position = SCNVector3Make(0, 0, 0)
+        let constrain = SCNLookAtConstraint(target: centr)
         cameraNode.constraints = [constrain]
         scnScene.rootNode.addChildNode(cameraNode)
     }
@@ -102,26 +102,44 @@ class TestViewController: UIViewController {
         let geometry = SCNSphere(radius: 0.3)
         let ball = SCNNode(geometry: geometry)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.cyan
+        material.diffuse.contents = getCollorAtom(type: atom.type)
         ball.geometry?.materials = [material]
         ball.position = atom.coordinates
         scnScene.rootNode.addChildNode(ball)
         return ball
     }
     
-    func setLight() {
+    func getCollorAtom(type: Atom.AtomType) -> UIColor{
+        var collor = UIColor()
+        switch type.rawValue {
+        case "H":
+            collor = UIColor.white
+        case "C":
+            collor = UIColor.black
+        case "N":
+            collor = UIColor.blue
+        case "O":
+            collor = UIColor.red
+        case "F":
+            collor = UIColor.green
+        default:
+            break
+        }
+        return collor
+    }
+    
+    func createOneLight(vectorLight: SCNVector3) {
         let light = SCNNode()
         light.light = SCNLight()
         light.light?.type = .directional
-        light.eulerAngles = SCNVector3Make(-45, 45, 0)
+        //light.eulerAngles = vectorLight
         scnScene.rootNode.addChildNode(light)
-        
-        let light2 = SCNNode()
-        light2.light = SCNLight()
-        light2.light?.type = .directional
-        light2.eulerAngles = SCNVector3Make(45, -45, 0)
-        scnScene.rootNode.addChildNode(light2)
-        
+    }
+    
+    func setLight() {
+        createOneLight(vectorLight: SCNVector3Make(-45, 45, 0))
+        //createOneLight(vectorLight: SCNVector3Make(45, 45, 0))
+        //createOneLight(vectorLight: SCNVector3Make(45, 0, -45))
     }
     
     func createPlane() {
@@ -189,15 +207,14 @@ class TestViewController: UIViewController {
     
     func createLinks() {
         let allLinks = Conection.allLink()
-        var i = 1
-        for numbersAtoms in allLinks{
+        for (i, numbersAtoms) in allLinks.enumerated(){
             for n in numbersAtoms {
-                if (i > n) {
+                let index = n - 1
+                if (i > index) {
                     continue
                 }
-                creationOneLink(from: self.atomsNods[i - 1], to: self.atomsNods[n - 1])
+                creationOneLink(from: self.atomsNods[i], to: self.atomsNods[index])
             }
-            i += 1
         }
     }
     
