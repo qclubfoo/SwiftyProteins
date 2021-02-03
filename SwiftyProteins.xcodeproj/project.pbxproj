@@ -14,6 +14,10 @@
 		00879DE625C2E20C00C7DFC3 /* LoginVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE425C2E20C00C7DFC3 /* LoginVC.storyboard */; };
 		00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE725C2E20E00C7DFC3 /* Assets.xcassets */; };
 		00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE925C2E20E00C7DFC3 /* LaunchScreen.storyboard */; };
+		008E5CFA25C95F4000B293A2 /* ProteinListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CF925C95F4000B293A2 /* ProteinListModel.swift */; };
+		008E5CFC25C962A300B293A2 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 008E5CFB25C962A300B293A2 /* ligands.txt */; };
+		008E5CFF25C96C4A00B293A2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */; };
+		008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5D0125C9956E00B293A2 /* LigandStructure.swift */; };
 		2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988A9ED25C43CD100EB05A8 /* TestViewController.swift */; };
 		2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */; };
 /* End PBXBuildFile section */
@@ -28,6 +32,10 @@
 		00879DE725C2E20E00C7DFC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00879DEA25C2E20E00C7DFC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00879DEC25C2E20E00C7DFC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		008E5CF925C95F4000B293A2 /* ProteinListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListModel.swift; sourceTree = "<group>"; };
+		008E5CFB25C962A300B293A2 /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
+		008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		008E5D0125C9956E00B293A2 /* LigandStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandStructure.swift; sourceTree = "<group>"; };
 		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +67,7 @@
 			children = (
 				00663F4425C2E4EF00D36116 /* ProteinListVC.storyboard */,
 				00663F4625C2E50B00D36116 /* ProteinListVC.swift */,
+				008E5CF925C95F4000B293A2 /* ProteinListModel.swift */,
 			);
 			name = ProteinListVC;
 			sourceTree = "<group>";
@@ -70,6 +79,7 @@
 				00879DDE25C2E20C00C7DFC3 /* AppDelegate.swift */,
 				00879DE925C2E20E00C7DFC3 /* LaunchScreen.storyboard */,
 				00879DEC25C2E20E00C7DFC3 /* Info.plist */,
+				008E5CFB25C962A300B293A2 /* ligands.txt */,
 			);
 			name = SupportFiles;
 			sourceTree = "<group>";
@@ -93,11 +103,29 @@
 		00879DDD25C2E20C00C7DFC3 /* SwiftyProteins */ = {
 			isa = PBXGroup;
 			children = (
+				008E5D0025C9955800B293A2 /* DataStructures */,
+				008E5CFD25C96C3900B293A2 /* Managers */,
 				00663F4225C2E47B00D36116 /* ProteinListVC */,
 				00663F4125C2E46A00D36116 /* LoginVC */,
 				00663F4325C2E49D00D36116 /* SupportFiles */,
 			);
 			path = SwiftyProteins;
+			sourceTree = "<group>";
+		};
+		008E5CFD25C96C3900B293A2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		008E5D0025C9955800B293A2 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				008E5D0125C9956E00B293A2 /* LigandStructure.swift */,
+			);
+			name = DataStructures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */,
+				008E5CFC25C962A300B293A2 /* ligands.txt in Resources */,
 				00663F4525C2E4EF00D36116 /* ProteinListVC.storyboard in Resources */,
 				00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */,
 				2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */,
@@ -173,9 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */,
+				008E5CFF25C96C4A00B293A2 /* NetworkManager.swift in Sources */,
 				00663F4725C2E50B00D36116 /* ProteinListVC.swift in Sources */,
 				00879DE325C2E20C00C7DFC3 /* LoginVC.swift in Sources */,
 				2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */,
+				008E5CFA25C95F4000B293A2 /* ProteinListModel.swift in Sources */,
 				00879DDF25C2E20C00C7DFC3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,7 +374,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
