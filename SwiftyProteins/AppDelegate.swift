@@ -17,12 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TestViewController.storyboardInstance()
         window?.makeKeyAndVisible()
-        showLoginVC()
+        //showLoginVC()
         return true
     }
 }
 
-extension AppDelegate: UIWindowSceneDelegate  {
+extension AppDelegate {
     
     private func showLoginVC() {
         let loginVC = LoginVC.storyboardInstance()
