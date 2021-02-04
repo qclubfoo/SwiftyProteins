@@ -21,9 +21,17 @@ class TestViewController: UIViewController {
     var firstObject: SCNNode!
     var ball: SCNNode!
     
+    var ligand: Ligand!
+    
     var left = Bool()
 
     var atomsNods: [SCNNode]!
+    
+    var centralNode: SCNNode!
+    
+    @IBAction func pressExit(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +41,11 @@ class TestViewController: UIViewController {
         //createPlane()
         //createBall()
         //createCylinder()
+        createCentreNode()
         createAtoms()
         createLinks()
         setLight()
         setCamera()
-        
-        // Do any additional setup after loading the view.
     }
     
     func setScene() {
@@ -46,24 +53,24 @@ class TestViewController: UIViewController {
         scnView.scene = scnScene
         
         scnView.showsStatistics = true              // Отображение статичтики
-        scnView.backgroundColor = .darkGray
+        scnView.backgroundColor = .lightGray
         scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
-        //scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
+        scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
     }
     
-    func setView( ){
-        scnView = self.view as? SCNView
+    func createCentreNode() {
+        centralNode = SCNNode()
+        centralNode.position = SCNVector3Make(0, 0, 0)
+        scnScene.rootNode.addChildNode(centralNode)
     }
     
     func setCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.usesOrthographicProjection = true
-        cameraNode.camera?.orthographicScale = 10
+        cameraNode.camera?.orthographicScale = 15
         cameraNode.position = SCNVector3Make(20, 20, 20)
-        let centr = SCNNode()
-        centr.position = SCNVector3Make(0, 0, 0)
-        let constrain = SCNLookAtConstraint(target: centr)
+        let constrain = SCNLookAtConstraint(target: centralNode)
         cameraNode.constraints = [constrain]
         scnScene.rootNode.addChildNode(cameraNode)
     }
@@ -73,7 +80,7 @@ class TestViewController: UIViewController {
         let geometry = SCNBox(width: 1, height: 1.5, length: 1, chamferRadius: 0)
         firstObject.geometry = geometry
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor(red: 1.0, green: 0.7, blue: 0, alpha: 1)
+        //material.diffuse.contents = UIColor(red: 1.0, green: 0.7, blue: 0, alpha: 1)
         firstObject.geometry?.materials = [material]
         firstObject.position = SCNVector3Make(0, 0, 0)
         scnScene.rootNode.addChildNode(firstObject)
@@ -83,7 +90,7 @@ class TestViewController: UIViewController {
         let geometry = SCNSphere(radius: 0.3)
         ball = SCNNode(geometry: geometry)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.red
+        //material.diffuse.contents = UIColor.red
         ball.geometry?.materials = [material]
         ball.position = SCNVector3Make(1, 0, 1)
         scnScene.rootNode.addChildNode(ball)
@@ -91,7 +98,8 @@ class TestViewController: UIViewController {
     }
     
     func createAtoms() {
-        let atoms = Atom.allAtoms()
+        //let atoms = Atom.allAtoms()
+        let atoms = ligand.atoms
         atomsNods = [SCNNode]()
         for atom in atoms {
             atomsNods.append(createOneAtom(atom: atom))
@@ -104,24 +112,27 @@ class TestViewController: UIViewController {
         let material = SCNMaterial()
         material.diffuse.contents = getCollorAtom(type: atom.type)
         ball.geometry?.materials = [material]
-        ball.position = atom.coordinates
+        let coordinats = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
+        ball.position = coordinats
         scnScene.rootNode.addChildNode(ball)
         return ball
     }
     
-    func getCollorAtom(type: Atom.AtomType) -> UIColor{
+    func getCollorAtom(type: AtomType) -> UIColor{
         var collor = UIColor()
         switch type.rawValue {
         case "H":
             collor = UIColor.white
         case "C":
-            collor = UIColor.black
+            collor = UIColor.darkGray
         case "N":
             collor = UIColor.blue
         case "O":
             collor = UIColor.red
-        case "F":
+        case "F", "Cl":
             collor = UIColor.green
+        case "S":
+            collor = UIColor.yellow
         default:
             break
         }
@@ -132,7 +143,8 @@ class TestViewController: UIViewController {
         let light = SCNNode()
         light.light = SCNLight()
         light.light?.type = .directional
-        //light.eulerAngles = vectorLight
+        light.eulerAngles = vectorLight
+        //light.constraints = [ SCNLookAtConstraint(target: centralNode)]
         scnScene.rootNode.addChildNode(light)
     }
     
@@ -201,19 +213,33 @@ class TestViewController: UIViewController {
         let cylinder = SCNNode(geometry: SCNCylinder(radius: 0.1, height: height))
         cylinder.position.y = Float(-height / 2.0)
         zNode.addChildNode(cylinder)
-        to.addChildNode(zNode)
-        to.constraints = [ SCNLookAtConstraint(target: from) ]
+        let newNode = SCNNode()
+        newNode.position = to.position
+        //to.addChildNode(zNode)
+        //to.constraints = [ SCNLookAtConstraint(target: from) ]
+        newNode.addChildNode(zNode)
+        newNode.constraints = [ SCNLookAtConstraint(target: from) ]
+        scnScene.rootNode.addChildNode(newNode)
     }
     
     func createLinks() {
-        let allLinks = Conection.allLink()
-        for (i, numbersAtoms) in allLinks.enumerated(){
+        //!!! Нужно уточнить соответствие номеров атомов и номеров atomsNods
+        //let allLinks = Conection.allLink()
+        print(atomsNods.count)
+        print(ligand.atoms.count)
+        let connections = ligand.connections
+        for (i, numbersAtoms) in connections.enumerated(){
             for n in numbersAtoms {
-                let index = n - 1
-                if (i > index) {
+                //let index = n - 1
+                print("\(i + 1) - \(n + 1) (\(i) - \(n))")
+                //if (i > index) {
+                //    print("continue")
+                //    continue
+                //}
+                if n >= atomsNods.count {
                     continue
                 }
-                creationOneLink(from: self.atomsNods[i], to: self.atomsNods[index])
+                creationOneLink(from: self.atomsNods[i], to: self.atomsNods[n])
             }
         }
     }

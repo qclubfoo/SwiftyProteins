@@ -72,6 +72,9 @@ extension ProteinListVC: UITableViewDelegate {
             
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        let nextVC = TestViewController.storyboardInstance()
+        nextVC.ligand = ligand
+        self.present(nextVC, animated: true, completion: nil)
     }
 }
 
