@@ -15,11 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = TestViewController.storyboardInstance()
-        window?.rootViewController = ProteinListVC.storyboardInstance()
+        let proteinListVC = ProteinListVC.storyboardInstance()
+        proteinListVC.model = ProteinModel()
+        proteinListVC.ligandManager = LigandManager()
+        let navController = UINavigationController(rootViewController: proteinListVC)
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
-        //showLoginVC()
-
+        showLoginVC()
         return true
     }
 }
@@ -29,11 +31,10 @@ extension AppDelegate {
     private func showLoginVC() {
         let loginVC = LoginVC.storyboardInstance()
         loginVC.modalPresentationStyle = .overFullScreen
-        window?.rootViewController?.present(loginVC, animated: true)
-        window?.makeKeyAndVisible()
+        window?.rootViewController?.present(loginVC, animated: false)
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         showLoginVC()
     }
 }

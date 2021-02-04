@@ -17,8 +17,6 @@ class LoginVC: UIViewController {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: "Please authenticate to proceed.") { [weak self] (success, error) in
                 if success {
                     DispatchQueue.main.async {
-                        // Что-то сделать
-                        print("HELLO")
                         self?.dismiss(animated: true, completion: nil)
                     }
                 } else {
@@ -28,14 +26,7 @@ class LoginVC: UIViewController {
             }
         } else {
             print("Not biometry")
-            //self.dismiss(animated: true, completion: nil)
-            // no biometry
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 }
 

@@ -28,6 +28,8 @@ class LigandParser: ILigandParser {
             let atoms: [Atom] = parse(ligandsComponents.atoms),
             let connections: [[Int]] = parse(ligandsComponents.connections) {
             completion(Ligand(atoms, connections), nil)
+        } else {
+            completion(nil, CustomError.invalidFile)
         }
     }
     
@@ -54,9 +56,9 @@ class LigandParser: ILigandParser {
                 }
                 guard
                     let type = AtomType(rawValue: String(filtredAtom[11])),
-                    let x = Double(filtredAtom[6]),
-                    let y = Double(filtredAtom[7]),
-                    let z = Double(filtredAtom[8]) else { return nil }
+                    let x = Float(filtredAtom[6]),
+                    let y = Float(filtredAtom[7]),
+                    let z = Float(filtredAtom[8]) else { return nil }
                 atomsArray.append(Atom(number: atomNumber, coordinates: (x, y, z), type: type))
             }
         }
