@@ -18,12 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 //        window?.rootViewController = TestViewController.storyboardInstance()
         window?.rootViewController = ProteinListVC.storyboardInstance()
         window?.makeKeyAndVisible()
-//        showLoginVC()
+        //showLoginVC()
+
         return true
     }
 }
 
-extension AppDelegate: UIWindowSceneDelegate  {
+extension AppDelegate {
     
     private func showLoginVC() {
         let loginVC = LoginVC.storyboardInstance()

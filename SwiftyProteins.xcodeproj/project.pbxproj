@@ -23,6 +23,7 @@
 		008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5D0125C9956E00B293A2 /* LigandStructure.swift */; };
 		2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988A9ED25C43CD100EB05A8 /* TestViewController.swift */; };
 		2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */; };
+		29E2296425CA7DA700028556 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E2296325CA7DA700028556 /* Atom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		008E5D0125C9956E00B293A2 /* LigandStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandStructure.swift; sourceTree = "<group>"; };
 		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
+		29E2296325CA7DA700028556 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				00879DE425C2E20C00C7DFC3 /* LoginVC.storyboard */,
 				2988A9ED25C43CD100EB05A8 /* TestViewController.swift */,
 				2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */,
+				29E2296325CA7DA700028556 /* Atom.swift */,
 			);
 			name = LoginVC;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				008E5CFF25C96C4A00B293A2 /* LigandDownloader.swift in Sources */,
 				00663F4725C2E50B00D36116 /* ProteinListVC.swift in Sources */,
 				00879DE325C2E20C00C7DFC3 /* LoginVC.swift in Sources */,
+				29E2296425CA7DA700028556 /* Atom.swift in Sources */,
 				2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */,
 				008E5CFA25C95F4000B293A2 /* ProteinListModel.swift in Sources */,
 				004764FF25CC017300F1A1E4 /* LigandParser.swift in Sources */,
@@ -365,14 +369,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
+				DEVELOPMENT_TEAM = 7SNPDG93FF;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.home.SwiftyProteins;
+				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -384,14 +388,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
+				DEVELOPMENT_TEAM = 7SNPDG93FF;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.home.SwiftyProteins;
+				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
