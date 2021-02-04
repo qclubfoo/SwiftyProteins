@@ -42,6 +42,9 @@ extension ProteinListVC: UITableViewDelegate {
 //        print("You choose \(proteinList[indexPath.row]) protein")
         let ligand = ligandDownloader.downloadLigand(with: proteinList[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
+        let nextVC = TestViewController.storyboardInstance()
+        nextVC.ligand = ligand
+        self.present(nextVC, animated: true, completion: nil)
     }
 }
 

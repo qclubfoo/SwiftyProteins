@@ -46,16 +46,17 @@ class LigandDownloader: ILigandDownloader {
     
     private func parse(_ atoms: [String]) -> [Atom]? {
         var atomsArray = [Atom]()
+        print("Count str atoms\(atoms.count)")
         for atom in atoms {
             let filtredAtom = atom.split(separator: " ")
             if filtredAtom.count >= 12 {
                 guard
+                    // Ниже изменил Double на Float
                     let type = AtomType(rawValue: String(filtredAtom[11])),
-                    let x = Double(filtredAtom[6]),
-                    let y = Double(filtredAtom[7]),
-                    let z = Double(filtredAtom[8]),
+                    let x = Float(filtredAtom[6]),
+                    let y = Float(filtredAtom[7]),
+                    let z = Float(filtredAtom[8]),
                     let number = Int(filtredAtom[1]) else { return nil }
-                
                 atomsArray.append(Atom(number: number - 1, coordinates: (x, y, z), type: type))
             }
         }
@@ -68,7 +69,7 @@ class LigandDownloader: ILigandDownloader {
         for connection in connections {
             let splitedConnection = connection.components(separatedBy: " ").filter({ !$0.isEmpty })
             var tmpArray = [Int]()
-            for number in splitedConnection {
+            for number in splitedConnection{
                 if let num = Int(number), num > currentNumber {
                     tmpArray.append(num - 1)
                 }

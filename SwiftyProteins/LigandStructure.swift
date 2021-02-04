@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 enum AtomType: String {
     case H = "H"
@@ -28,7 +29,7 @@ enum AtomType: String {
 
 struct Atom {
     let number: Int
-    let coordinates: (x: Double, y: Double, z: Double)
+    let coordinates: (x: Float, y: Float, z: Float)
     let type: AtomType
 }
 

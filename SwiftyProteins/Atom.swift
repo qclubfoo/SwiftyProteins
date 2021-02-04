@@ -8,6 +8,7 @@
 
 import Foundation
 import SceneKit
+/*
 struct Atom {
     var coordinates: SCNVector3
     var type: AtomType
@@ -21,7 +22,7 @@ struct Atom {
     }
 }
 
-extension Atom {
+extension AtomTemp {
     static func allAtoms() -> [Atom] { return [
         Atom(coordinates: SCNVector3( 0.018,  1.763,  1.424), type: AtomType.n),
         Atom(coordinates: SCNVector3(-0.305,  0.331,  1.460), type: AtomType.c),
@@ -76,3 +77,4 @@ extension Conection {
     ]
     }
 }
+*/
