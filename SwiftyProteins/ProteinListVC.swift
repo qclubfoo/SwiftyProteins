@@ -8,18 +8,35 @@
 
 import UIKit
 
+protocol ProteinListVCDelegate: class {
+    func updateTableView(withNewData data: [String])
+}
+
 class ProteinListVC: UIViewController {
     
-    let model: IProteinModel = ProteinModel()
-    lazy var ligandDownloader: ILigandDownloader = LigandDownloader()
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var model: IProteinModel = ProteinModel()
+    lazy var ligandManager: ILigandManager = LigandManager()
     var proteinList = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        model.delegate = self
         if proteinList.isEmpty {
-            proteinList = model.getProteinList()
+            model.getProteins()
+        }
+    }
+}
+
+extension ProteinListVC: ProteinListVCDelegate {
+    func updateTableView(withNewData data: [String]) {
+        self.proteinList = data
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 }
@@ -39,8 +56,21 @@ extension ProteinListVC: UITableViewDataSource {
 
 extension ProteinListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("You choose \(proteinList[indexPath.row]) protein")
-        let ligand = ligandDownloader.downloadLigand(with: proteinList[indexPath.row])
+        tableView.allowsSelection = false
+        activityIndicator.startAnimating()
+        ligandManager.getLigandWith(name: proteinList[indexPath.row]) { ligand, error in
+            print(ligand)
+            DispatchQueue.main.async { [weak self] in
+                if let error = error {
+                    let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                    self?.present(ac, animated: true)
+                }
+                self?.activityIndicator.stopAnimating()
+                tableView.allowsSelection = true
+            }
+            
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

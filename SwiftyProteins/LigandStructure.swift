@@ -9,6 +9,7 @@
 import Foundation
 
 enum AtomType: String {
+    
     case H = "H"
     case C = "C"
     case N = "N"
@@ -18,25 +19,27 @@ enum AtomType: String {
     case Br = "Br"
     case S = "S"
     case Cl = "Cl"
-//    case H = "H"
-//    case O = "O"
-//    case C = "C"
-//    case N = "N"
+    
 }
 
 
 
 struct Atom {
+    
     let number: Int
     let coordinates: (x: Double, y: Double, z: Double)
     let type: AtomType
+    
 }
 
 struct Ligand {
+    
     let atoms: [Atom]
     let connections: [[Int]]
     
-//    func getConnectionsCoordinates(_ first: Int, _ second: Int) -> [(x: Double, y: Double, z: Double)] {
-//        
-//    }
+    init(_ atoms: [Atom], _ connections: [[Int]]) {
+        self.atoms = atoms
+        self.connections = connections
+    }
+    
 }

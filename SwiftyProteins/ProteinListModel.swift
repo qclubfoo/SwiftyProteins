@@ -9,18 +9,25 @@
 import Foundation
 
 protocol IProteinModel {
-    func getProteinList() -> [String]
+    var delegate: ProteinListVCDelegate? { get set }
+    
+    func getProteins()
 }
 
 class ProteinModel: IProteinModel {
-    func getProteinList() -> [String] {
-        guard let path = Bundle.main.path(forResource: "ligands", ofType: "txt") else { fatalError("Can't find or open ligands.txt") }
-        do {
-            let fileContent = try String(contentsOfFile: path, encoding: .utf8).dropLast()
-            let proteinList = fileContent.components(separatedBy: "\n")
-            return proteinList
-        } catch {
-            fatalError("Can't find or open ligands.txt")
+    
+    weak var delegate: ProteinListVCDelegate?
+    
+    func getProteins() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let path = Bundle.main.path(forResource: "ligands", ofType: "txt") else { fatalError("Can't find or open ligands.txt") }
+            do {
+                let fileContent = try String(contentsOfFile: path, encoding: .utf8).dropLast()
+                let proteinList = fileContent.components(separatedBy: "\n")
+                self?.delegate?.updateTableView(withNewData: proteinList)
+            } catch {
+                fatalError("Can't find or open ligands.txt")
+            }
         }
     }
 }

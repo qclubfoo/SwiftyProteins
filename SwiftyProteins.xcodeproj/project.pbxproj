@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004764FF25CC017300F1A1E4 /* LigandParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004764FE25CC017300F1A1E4 /* LigandParser.swift */; };
+		0047650125CC076E00F1A1E4 /* LigandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047650025CC076E00F1A1E4 /* LigandManager.swift */; };
+		0047650325CC1C8700F1A1E4 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047650225CC1C8600F1A1E4 /* CustomErrors.swift */; };
 		00663F4525C2E4EF00D36116 /* ProteinListVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00663F4425C2E4EF00D36116 /* ProteinListVC.storyboard */; };
 		00663F4725C2E50B00D36116 /* ProteinListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00663F4625C2E50B00D36116 /* ProteinListVC.swift */; };
 		00879DDF25C2E20C00C7DFC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00879DDE25C2E20C00C7DFC3 /* AppDelegate.swift */; };
@@ -16,13 +19,16 @@
 		00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00879DE925C2E20E00C7DFC3 /* LaunchScreen.storyboard */; };
 		008E5CFA25C95F4000B293A2 /* ProteinListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CF925C95F4000B293A2 /* ProteinListModel.swift */; };
 		008E5CFC25C962A300B293A2 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 008E5CFB25C962A300B293A2 /* ligands.txt */; };
-		008E5CFF25C96C4A00B293A2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */; };
+		008E5CFF25C96C4A00B293A2 /* LigandDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */; };
 		008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5D0125C9956E00B293A2 /* LigandStructure.swift */; };
 		2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988A9ED25C43CD100EB05A8 /* TestViewController.swift */; };
 		2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		004764FE25CC017300F1A1E4 /* LigandParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandParser.swift; sourceTree = "<group>"; };
+		0047650025CC076E00F1A1E4 /* LigandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandManager.swift; sourceTree = "<group>"; };
+		0047650225CC1C8600F1A1E4 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		00663F4425C2E4EF00D36116 /* ProteinListVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProteinListVC.storyboard; sourceTree = "<group>"; };
 		00663F4625C2E50B00D36116 /* ProteinListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListVC.swift; sourceTree = "<group>"; };
 		00879DDB25C2E20C00C7DFC3 /* SwiftyProteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyProteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,7 +40,7 @@
 		00879DEC25C2E20E00C7DFC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		008E5CF925C95F4000B293A2 /* ProteinListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinListModel.swift; sourceTree = "<group>"; };
 		008E5CFB25C962A300B293A2 /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
-		008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandDownloader.swift; sourceTree = "<group>"; };
 		008E5D0125C9956E00B293A2 /* LigandStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandStructure.swift; sourceTree = "<group>"; };
 		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
@@ -115,7 +121,9 @@
 		008E5CFD25C96C3900B293A2 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				008E5CFE25C96C4A00B293A2 /* NetworkManager.swift */,
+				008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */,
+				004764FE25CC017300F1A1E4 /* LigandParser.swift */,
+				0047650025CC076E00F1A1E4 /* LigandManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -124,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				008E5D0125C9956E00B293A2 /* LigandStructure.swift */,
+				0047650225CC1C8600F1A1E4 /* CustomErrors.swift */,
 			);
 			name = DataStructures;
 			sourceTree = "<group>";
@@ -203,12 +212,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */,
-				008E5CFF25C96C4A00B293A2 /* NetworkManager.swift in Sources */,
+				0047650325CC1C8700F1A1E4 /* CustomErrors.swift in Sources */,
+				008E5CFF25C96C4A00B293A2 /* LigandDownloader.swift in Sources */,
 				00663F4725C2E50B00D36116 /* ProteinListVC.swift in Sources */,
 				00879DE325C2E20C00C7DFC3 /* LoginVC.swift in Sources */,
 				2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */,
 				008E5CFA25C95F4000B293A2 /* ProteinListModel.swift in Sources */,
+				004764FF25CC017300F1A1E4 /* LigandParser.swift in Sources */,
 				00879DDF25C2E20C00C7DFC3 /* AppDelegate.swift in Sources */,
+				0047650125CC076E00F1A1E4 /* LigandManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

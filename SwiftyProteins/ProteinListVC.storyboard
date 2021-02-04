@@ -49,6 +49,9 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="d2u-GH-gOZ">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -56,12 +59,18 @@
                             <constraint firstItem="H7H-Pj-UMX" firstAttribute="top" secondItem="zm9-PI-eig" secondAttribute="top" id="9z3-jH-Xwk"/>
                             <constraint firstItem="zm9-PI-eig" firstAttribute="bottom" secondItem="Uc5-mO-AhA" secondAttribute="bottom" id="MnS-ye-ELi"/>
                             <constraint firstItem="zm9-PI-eig" firstAttribute="trailing" secondItem="Uc5-mO-AhA" secondAttribute="trailing" id="Nbq-k5-blI"/>
+                            <constraint firstItem="d2u-GH-gOZ" firstAttribute="centerY" secondItem="djN-mc-bmW" secondAttribute="centerY" id="NrH-Jz-X4X"/>
                             <constraint firstItem="H7H-Pj-UMX" firstAttribute="leading" secondItem="zm9-PI-eig" secondAttribute="leading" id="WrU-DX-29Y"/>
                             <constraint firstItem="Uc5-mO-AhA" firstAttribute="leading" secondItem="zm9-PI-eig" secondAttribute="leading" id="m0j-E4-7ST"/>
                             <constraint firstItem="Uc5-mO-AhA" firstAttribute="top" secondItem="H7H-Pj-UMX" secondAttribute="bottom" id="yUv-J1-rgR"/>
+                            <constraint firstItem="d2u-GH-gOZ" firstAttribute="centerX" secondItem="djN-mc-bmW" secondAttribute="centerX" id="z1Q-7i-L36"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zm9-PI-eig"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="d2u-GH-gOZ" id="lbM-4n-ZdI"/>
+                        <outlet property="tableView" destination="Uc5-mO-AhA" id="2Yd-gi-AIl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmc-Qv-A5y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
