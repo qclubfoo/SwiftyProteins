@@ -14,7 +14,6 @@ enum CustomError: Error {
     case invalidFile
     case fileNotExist
     case invalidConverting
-    
 }
 
 extension CustomError: LocalizedError {

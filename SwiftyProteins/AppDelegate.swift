@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         let navController = UINavigationController(rootViewController: proteinListVC)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
-        showLoginVC()
+        //showLoginVC()
         return true
     }
 }

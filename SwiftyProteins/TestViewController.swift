@@ -29,9 +29,7 @@ class TestViewController: UIViewController {
     
     var centralNode: SCNNode!
     
-    @IBAction func pressExit(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
+    var light: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +42,7 @@ class TestViewController: UIViewController {
         createCentreNode()
         createAtoms()
         createLinks()
-        setLight()
+        //setLight()
         setCamera()
     }
     
@@ -54,7 +52,7 @@ class TestViewController: UIViewController {
         
         scnView.showsStatistics = true              // Отображение статичтики
         scnView.backgroundColor = .lightGray
-        scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
+        //scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
         scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
     }
     
@@ -111,6 +109,8 @@ class TestViewController: UIViewController {
         let ball = SCNNode(geometry: geometry)
         let material = SCNMaterial()
         material.diffuse.contents = getCollorAtom(type: atom.type)
+        //material.lightingModel = .
+        material.lightingModel = .physicallyBased
         ball.geometry?.materials = [material]
         let coordinats = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
         ball.position = coordinats
@@ -125,14 +125,44 @@ class TestViewController: UIViewController {
             collor = UIColor.white
         case "C":
             collor = UIColor.darkGray
-        case "N":
+        case "N", "U", "W":
             collor = UIColor.blue
         case "O":
             collor = UIColor.red
-        case "F", "Cl":
+        case "F", "CL":
             collor = UIColor.green
-        case "S":
+        case "S", "AU":
             collor = UIColor.yellow
+        case "BR":
+            collor = UIColor(red: 0.73, green: 0.03, blue: 0, alpha: 1)
+        case "B", "CU":
+            collor = UIColor(red: 1.0, green: 0.73, blue: 0.47, alpha: 1)
+        case "P", "FE", "SE":
+            collor = UIColor.orange
+        case "I", "AS", "CS", "K", "LI", "MN", "NA":
+            collor = UIColor.purple
+        case "MO", "RU":
+            collor = UIColor(red: 0.15, green: 0.82, blue: 0.82, alpha: 1)
+        case "V":
+            collor = UIColor(red: 0.74, green: 0.74, blue: 0.76, alpha: 1)
+        case "CO", "NI":
+            collor = UIColor(red: 1.13, green: 0.6, blue: 0.69, alpha: 1)
+        case "BA", "MG", "CA":
+            collor = UIColor(red: 0, green: 0.55, blue: 0, alpha: 1)
+        case "CD":
+            collor = UIColor(red: 1.0, green: 0.97, blue: 0, alpha: 1)
+        case "EU":
+            collor = UIColor(red: 0, green: 1.0, blue: 0.88, alpha: 1)
+        case "GA":
+            collor = UIColor(red: 0.89, green: 0.62, blue: 0.62, alpha: 1)
+        case "HG", "PT":
+            collor = UIColor(red: 0.82, green: 0.82, blue: 0.93, alpha: 1)
+        case "LA":
+            collor = UIColor(red: 0.36, green: 0.98, blue: 1.0, alpha: 1)
+        case "PB":
+            collor = UIColor(red: 0.38, green: 0.387, blue: 0.43, alpha: 1)
+        case "PD":
+            collor = UIColor(red: 0, green: 0.46, blue: 0.6, alpha: 1)
         default:
             break
         }
@@ -140,18 +170,19 @@ class TestViewController: UIViewController {
     }
     
     func createOneLight(vectorLight: SCNVector3) {
-        let light = SCNNode()
+        light = SCNNode()
         light.light = SCNLight()
         light.light?.type = .directional
         light.eulerAngles = vectorLight
-        //light.constraints = [ SCNLookAtConstraint(target: centralNode)]
+        light.position = SCNVector3Make(10, 10, 10)
+        light.constraints = [ SCNLookAtConstraint(target: centralNode)]
         scnScene.rootNode.addChildNode(light)
     }
     
     func setLight() {
-        createOneLight(vectorLight: SCNVector3Make(-45, 45, 0))
-        //createOneLight(vectorLight: SCNVector3Make(45, 45, 0))
-        //createOneLight(vectorLight: SCNVector3Make(45, 0, -45))
+        createOneLight(vectorLight: SCNVector3Make(Float(Double.pi / 2.0), 0, 0))
+        //createOneLight(vectorLight: SCNVector3Make(-45, -45, 0))
+        //createOneLight(vectorLight: SCNVector3Make(0, 0, 90))
     }
     
     func createPlane() {
@@ -209,8 +240,15 @@ class TestViewController: UIViewController {
         let zNode = SCNNode()
         zNode.eulerAngles.x = Float(Double.pi / 2.0)
         
+        
+        let geometry =  SCNCylinder(radius: 0.1, height: height)
+        let material = SCNMaterial()
+        material.lightingModel = .physicallyBased
+        material.diffuse.contents = UIColor.darkGray
+        geometry.materials = [material]
+        
         //Создаем цилиндр
-        let cylinder = SCNNode(geometry: SCNCylinder(radius: 0.1, height: height))
+        let cylinder = SCNNode(geometry: geometry)
         cylinder.position.y = Float(-height / 2.0)
         zNode.addChildNode(cylinder)
         let newNode = SCNNode()
@@ -225,13 +263,13 @@ class TestViewController: UIViewController {
     func createLinks() {
         //!!! Нужно уточнить соответствие номеров атомов и номеров atomsNods
         //let allLinks = Conection.allLink()
-        print(atomsNods.count)
-        print(ligand.atoms.count)
+        //print(atomsNods.count)
+        //print(ligand.atoms.count)
         let connections = ligand.connections
         for (i, numbersAtoms) in connections.enumerated(){
             for n in numbersAtoms {
                 //let index = n - 1
-                print("\(i + 1) - \(n + 1) (\(i) - \(n))")
+                //print("\(i + 1) - \(n + 1) (\(i) - \(n))")
                 //if (i > index) {
                 //    print("continue")
                 //    continue
@@ -245,6 +283,13 @@ class TestViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let atoms = ligand.atoms
+        for (i, atomNode) in atomsNods.enumerated() {
+            let position = SCNVector3(atoms[i].coordinates.x, atoms[i].coordinates.y, atoms[i].coordinates.z)
+            atomNode.removeAllActions()
+            atomNode.runAction(.move(to: position, duration: 5))
+        }
+
 //        if left == false {
 //            ball.removeAllActions()
 //            // бесконечно двигаем шарик по координате X со скоростью 5, длительностью 20 мс

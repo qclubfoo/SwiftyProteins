@@ -87,3 +87,36 @@ extension ProteinListVC {
         return vc
     }
 }
+
+
+/*
+
+ 
+ extension ProteinListVC: UITableViewDelegate {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         tableView.allowsSelection = false
+         activityIndicator.startAnimating()
+         for str in proteinList {
+         //ligandManager?.getLigandWith(name: proteinList[indexPath.row]) { ligand, error in
+             ligandManager?.getLigandWith(name: str) { ligand, error in
+             DispatchQueue.main.async { [weak self] in
+                 if let error = error {
+                     print("Error str = \(str)")
+                     //let ac = UIAlertController(title: "Error", message: error.localizedDescription, //preferredStyle: .alert)
+                     //ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                     //self?.present(ac, animated: true)
+                 } else {
+                     //let nextVC = TestViewController.storyboardInstance()
+                     //nextVC.ligand = ligand
+                     //nextVC.title = self?.proteinList[indexPath.row]
+                     //self?.navigationController?.pushViewController(nextVC, animated: true)
+                 }
+                 self?.activityIndicator.stopAnimating()
+                 tableView.allowsSelection = true
+             }
+         }
+         }
+         tableView.deselectRow(at: indexPath, animated: true)
+     }
+ }
+ */

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WmI-jO-xLh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WmI-jO-xLh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,18 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="ypX-NS-kZG">
+                            <sceneKitView clipsSubviews="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypX-NS-kZG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </sceneKitView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="7cH-fz-Bs5"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstItem="ypX-NS-kZG" firstAttribute="leading" secondItem="7cH-fz-Bs5" secondAttribute="leading" id="0cE-jc-NnR"/>
                             <constraint firstItem="7cH-fz-Bs5" firstAttribute="trailing" secondItem="ypX-NS-kZG" secondAttribute="trailing" id="3nJ-b2-e9z"/>
                             <constraint firstItem="7cH-fz-Bs5" firstAttribute="bottom" secondItem="ypX-NS-kZG" secondAttribute="bottom" id="4gH-Cv-Yux"/>
                             <constraint firstItem="ypX-NS-kZG" firstAttribute="top" secondItem="7cH-fz-Bs5" secondAttribute="top" id="YSB-Kq-Xii"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7cH-fz-Bs5"/>
                     </view>
                     <connections>
                         <outlet property="scnView" destination="ypX-NS-kZG" id="ZO5-YT-SEk"/>
@@ -37,4 +39,9 @@
             <point key="canvasLocation" x="1920" y="113"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
