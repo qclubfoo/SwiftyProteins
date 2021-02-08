@@ -20,7 +20,7 @@ class ProteinModel: IProteinModel {
     
     func getProteins() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let path = Bundle.main.path(forResource: "ligands", ofType: "txt") else { fatalError("Can't find or open ligands.txt") }
+            guard let path = Bundle.main.path(forResource: "ligands_new", ofType: "txt") else { fatalError("Can't find or open ligands.txt") }
             do {
                 let fileContent = try String(contentsOfFile: path, encoding: .utf8).dropLast()
                 let proteinList = fileContent.components(separatedBy: "\n")
