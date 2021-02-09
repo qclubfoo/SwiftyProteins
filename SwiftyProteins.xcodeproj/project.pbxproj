@@ -21,6 +21,7 @@
 		008E5CFC25C962A300B293A2 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 008E5CFB25C962A300B293A2 /* ligands.txt */; };
 		008E5CFF25C96C4A00B293A2 /* LigandDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */; };
 		008E5D0225C9956E00B293A2 /* LigandStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E5D0125C9956E00B293A2 /* LigandStructure.swift */; };
+		296D5F7325D11A43000D95C5 /* ligands_new.txt in Resources */ = {isa = PBXBuildFile; fileRef = 296D5F7225D11A43000D95C5 /* ligands_new.txt */; };
 		2988A9EE25C43CD100EB05A8 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988A9ED25C43CD100EB05A8 /* TestViewController.swift */; };
 		2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */; };
 		29E2296425CA7DA700028556 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E2296325CA7DA700028556 /* Atom.swift */; };
@@ -43,6 +44,7 @@
 		008E5CFB25C962A300B293A2 /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
 		008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandDownloader.swift; sourceTree = "<group>"; };
 		008E5D0125C9956E00B293A2 /* LigandStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandStructure.swift; sourceTree = "<group>"; };
+		296D5F7225D11A43000D95C5 /* ligands_new.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ligands_new.txt; sourceTree = "<group>"; };
 		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
 		29E2296325CA7DA700028556 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				00879DE925C2E20E00C7DFC3 /* LaunchScreen.storyboard */,
 				00879DEC25C2E20E00C7DFC3 /* Info.plist */,
 				008E5CFB25C962A300B293A2 /* ligands.txt */,
+				296D5F7225D11A43000D95C5 /* ligands_new.txt */,
 			);
 			name = SupportFiles;
 			sourceTree = "<group>";
@@ -167,7 +170,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = home;
 				TargetAttributes = {
 					00879DDA25C2E20C00C7DFC3 = {
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00879DEB25C2E20E00C7DFC3 /* LaunchScreen.storyboard in Resources */,
+				296D5F7325D11A43000D95C5 /* ligands_new.txt in Resources */,
 				008E5CFC25C962A300B293A2 /* ligands.txt in Resources */,
 				00663F4525C2E4EF00D36116 /* ProteinListVC.storyboard in Resources */,
 				00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */,
@@ -276,6 +280,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -336,6 +341,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

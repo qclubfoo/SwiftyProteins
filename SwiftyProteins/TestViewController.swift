@@ -13,6 +13,7 @@ import SceneKit
 class TestViewController: UIViewController {
     
     @IBOutlet var scnView: SCNView!
+
     //var scnView: SCNView!
     var scnScene: SCNScene!
     
@@ -31,8 +32,25 @@ class TestViewController: UIViewController {
     
     var light: SCNNode!
     
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        let location: CGPoint = sender.location(in: scnView)
+        print(location)
+        let hits = scnView.hitTest(location, options: nil)
+        if let tappedNode = hits.first?.node {
+            for atom in ligand.atoms {
+                let location = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
+                if location == tappedNode.position {
+                    print(atom.type)
+                }
+            }
+            
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTap()
         //setView()
         setScene()
         //createObject()
@@ -46,6 +64,15 @@ class TestViewController: UIViewController {
         setCamera()
     }
     
+    func setTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(oneTap))
+        tap.numberOfTapsRequired = 2
+        scnView.addGestureRecognizer(tap)
+    }
+    
+    @objc func oneTap() {
+        print("hello")
+    }
     func setScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
@@ -105,7 +132,13 @@ class TestViewController: UIViewController {
     }
     
     func createOneAtom(atom: Atom) -> SCNNode {
-        let geometry = SCNSphere(radius: 0.3)
+        let radius: CGFloat
+        if atom.type == .H {
+            radius = 0.25
+        } else {
+            radius = 0.3
+        }
+        let geometry = SCNSphere(radius: radius)
         let ball = SCNNode(geometry: geometry)
         let material = SCNMaterial()
         material.diffuse.contents = getCollorAtom(type: atom.type)
@@ -169,69 +202,6 @@ class TestViewController: UIViewController {
         return collor
     }
     
-    func createOneLight(vectorLight: SCNVector3) {
-        light = SCNNode()
-        light.light = SCNLight()
-        light.light?.type = .directional
-        light.eulerAngles = vectorLight
-        light.position = SCNVector3Make(10, 10, 10)
-        light.constraints = [ SCNLookAtConstraint(target: centralNode)]
-        scnScene.rootNode.addChildNode(light)
-    }
-    
-    func setLight() {
-        createOneLight(vectorLight: SCNVector3Make(Float(Double.pi / 2.0), 0, 0))
-        //createOneLight(vectorLight: SCNVector3Make(-45, -45, 0))
-        //createOneLight(vectorLight: SCNVector3Make(0, 0, 90))
-    }
-    
-    func createPlane() {
-        let geometry = SCNPlane(width: 20.0, height: 20.0)
-        geometry.cornerRadius = 10
-        geometry.widthSegmentCount = 10
-        geometry.heightSegmentCount = 10
-        let plane = SCNNode(geometry: geometry)
-        plane.position = SCNVector3Make(0, 0, 0)
-        scnScene.rootNode.addChildNode(plane)
-    }
-    
-    func createCylinder() {
-        let geometry = SCNCylinder(radius: 0.1, height: 3)
-//
-//        let materianl = SCNMaterial()
-//        materianl.diffuse.contents = UIColor.green
-//        geometry.materials = [materianl]
-//        let cylinder = SCNNode(geometry: geometry)
-//        cylinder.position = SCNVector3Make(0, 0, 0)
-//        cylinder.eulerAngles.x = Float(Double.pi / 2)
-//        //cylinder.eulerAngles = ball.eulerAngles
-//        let constrain = SCNLookAtConstraint(target: ball)
-//        constrain.isGimbalLockEnabled = true
-//        //constrain.targetPosition = ball.position
-//        //constrain.inv
-//        //constrain.isGimbalLockEnabled = true
-//        //constrain.localFront = ball.position
-//        //constrain.targetOffset = ball.position
-//        //constrain.worldUp = ball.position
-//        cylinder.constraints = [constrain]
-//
-//        scnScene.rootNode.addChildNode(cylinder)
-        
-        let heigth = 5.0
-        let zAlignNode = SCNNode()
-        zAlignNode.eulerAngles.x = Float(Double.pi / 2)
-        
-        let cylinder = SCNNode(geometry: geometry)
-        cylinder.position.y = Float(-heigth / 2.0)
-        zAlignNode.addChildNode(cylinder)
-        let pNode = SCNNode()
-        pNode.position = SCNVector3Make(0, 3, 0)
-        pNode.geometry = SCNSphere(radius: 0.1)
-        scnScene.rootNode.addChildNode(pNode)
-        pNode.addChildNode(zAlignNode)
-        pNode.constraints = [ SCNLookAtConstraint(target: ball)]
-    }
-    
     func creationOneLink(from: SCNNode, to: SCNNode) {
         let positionOne = from.position
         let positionTwo = to.position
@@ -261,19 +231,9 @@ class TestViewController: UIViewController {
     }
     
     func createLinks() {
-        //!!! Нужно уточнить соответствие номеров атомов и номеров atomsNods
-        //let allLinks = Conection.allLink()
-        //print(atomsNods.count)
-        //print(ligand.atoms.count)
         let connections = ligand.connections
         for (i, numbersAtoms) in connections.enumerated(){
             for n in numbersAtoms {
-                //let index = n - 1
-                //print("\(i + 1) - \(n + 1) (\(i) - \(n))")
-                //if (i > index) {
-                //    print("continue")
-                //    continue
-                //}
                 if n >= atomsNods.count {
                     continue
                 }
@@ -282,14 +242,11 @@ class TestViewController: UIViewController {
         }
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let atoms = ligand.atoms
-        for (i, atomNode) in atomsNods.enumerated() {
-            let position = SCNVector3(atoms[i].coordinates.x, atoms[i].coordinates.y, atoms[i].coordinates.z)
-            atomNode.removeAllActions()
-            atomNode.runAction(.move(to: position, duration: 5))
-        }
-
+        
 //        if left == false {
 //            ball.removeAllActions()
 //            // бесконечно двигаем шарик по координате X со скоростью 5, длительностью 20 мс
@@ -303,6 +260,7 @@ class TestViewController: UIViewController {
 //        }
     }
     
+    
     deinit {
         print("Deinit TestViewController")
     }
@@ -314,5 +272,11 @@ extension TestViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         guard let vc = storyboard.instantiateInitialViewController() as? TestViewController else { fatalError("LoginVC doesn't exist") }
         return vc
+    }
+}
+
+extension SCNVector3 {
+    static func == (left: SCNVector3, right: SCNVector3) -> Bool {
+        return left.x == right.x && left.y == right.y && left.z == right.z
     }
 }

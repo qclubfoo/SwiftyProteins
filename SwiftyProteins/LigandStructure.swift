@@ -50,7 +50,6 @@ enum AtomType: String {
     case PD = "PD"
     case PT = "PT"
     case W = "W"
-    
 }
 
 
