@@ -48,7 +48,6 @@ extension ProteinListVC: ProteinListVCDelegate {
     
     func loudElements(withNewStruct periodicElementsStructure: PeriodicElemestsStructures) {
         self.elements = periodicElementsStructure.elements
-        print(elements)
     }
 }
 
@@ -78,6 +77,7 @@ extension ProteinListVC: UITableViewDelegate {
                 } else {
                     let nextVC = TestViewController.storyboardInstance()
                     nextVC.ligand = ligand
+                    nextVC.elements = self?.elements
                     nextVC.title = self?.proteinList[indexPath.row]
                     self?.navigationController?.pushViewController(nextVC, animated: true)
                 }

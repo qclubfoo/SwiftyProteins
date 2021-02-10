@@ -13,8 +13,7 @@ import SceneKit
 class TestViewController: UIViewController {
     
     @IBOutlet var scnView: SCNView!
-
-    //var scnView: SCNView!
+    
     var scnScene: SCNScene!
     
     var cameraNode: SCNNode!
@@ -27,6 +26,7 @@ class TestViewController: UIViewController {
     var left = Bool()
 
     var atomsNods: [SCNNode]!
+    var elements: [Element]?
     
     var centralNode: SCNNode!
     
@@ -34,13 +34,19 @@ class TestViewController: UIViewController {
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         let location: CGPoint = sender.location(in: scnView)
-        print(location)
+        //print(location)
         let hits = scnView.hitTest(location, options: nil)
         if let tappedNode = hits.first?.node {
             for atom in ligand.atoms {
                 let location = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
                 if location == tappedNode.position {
-                    print(atom.type)
+                    guard let elements = self.elements else { return }
+                    for elementAtom in elements {
+                        if atom.type.rawValue.uppercased() == elementAtom.symbol.uppercased() {
+                            print(elementAtom.name)
+                            return
+                        }
+                    }
                 }
             }
             
@@ -71,8 +77,9 @@ class TestViewController: UIViewController {
     }
     
     @objc func oneTap() {
-        print("hello")
+        print("double tap")
     }
+    
     func setScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
@@ -142,7 +149,6 @@ class TestViewController: UIViewController {
         let ball = SCNNode(geometry: geometry)
         let material = SCNMaterial()
         material.diffuse.contents = getCollorAtom(type: atom.type)
-        //material.lightingModel = .
         material.lightingModel = .physicallyBased
         ball.geometry?.materials = [material]
         let coordinats = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)

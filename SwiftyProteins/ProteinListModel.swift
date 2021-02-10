@@ -20,22 +20,18 @@ class ProteinModel: IProteinModel {
     weak var delegate: ProteinListVCDelegate?
     
     func getPeriodicTableAtoms() {
-        let urlString = "https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/periodic-table-lookup.json"
-        guard let url = URL(string: urlString) else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            guard let data = data else { return }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let path = Bundle.main.path(forResource: "PeriodicTableJSON", ofType: "json") else { fatalError("Can't find or open PeriodicTableJSON.json") }
             do {
+                let fileContent = try String(contentsOfFile: path, encoding: .utf8)
+                let data = Data(fileContent.utf8)
+                let decoder = JSONDecoder()
                 let periodicElemestsStructures = try decoder.decode(PeriodicElemestsStructures.self, from: data)
-                self.delegate?.loudElements(withNewStruct: periodicElemestsStructures)
+                self?.delegate?.loudElements(withNewStruct: periodicElemestsStructures)
             } catch {
-                print("\(error)")
+                fatalError("Can't find or open PeriodicTableJSON.json")
             }
-        }.resume()
+        }
     }
     
     func getProteins() {
@@ -51,17 +47,3 @@ class ProteinModel: IProteinModel {
         }
     }
 }
-/*
- let bundle = Bundle(for: type(of: self))
- guard
-     let url = bundle.url(forResource: "PeriodicTableJSON", withExtension: "json"),
-     let data = try? Data(contentsOf: url) else { fatalError("Can't find or open PeriodicTableJSON.json") }
- do {
-     let decoger = JSONDecoder()
-     decoger.keyDecodingStrategy = .convertFromSnakeCase
-     let periodicElemestsStructures = try decoger.decode(PeriodicElemestsStructures.self, from: data)
-     self?.delegate?.loudElements(withNewStruct: periodicElemestsStructures)
- } catch {
-     fatalError("Can't find or open PeriodicTableJSON.json")
- }
- */
