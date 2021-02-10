@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProteinListVCDelegate: class {
     func updateTableView(withNewData data: [String])
+    func loudElements(withNewStruct periodicElementsStructure: PeriodicElemestsStructures)
 }
 
 class ProteinListVC: UIViewController {
@@ -20,6 +21,7 @@ class ProteinListVC: UIViewController {
     var model: IProteinModel?
     var ligandManager: ILigandManager?
     var proteinList = [String]()
+    var elements = [Element]()
     
     
     override func viewDidLoad() {
@@ -30,6 +32,9 @@ class ProteinListVC: UIViewController {
         if proteinList.isEmpty {
             model?.getProteins()
         }
+        if elements.isEmpty {
+            model?.getPeriodicTableAtoms()
+        }
     }
 }
 
@@ -39,6 +44,11 @@ extension ProteinListVC: ProteinListVCDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+    
+    func loudElements(withNewStruct periodicElementsStructure: PeriodicElemestsStructures) {
+        self.elements = periodicElementsStructure.elements
+        print(elements)
     }
 }
 
