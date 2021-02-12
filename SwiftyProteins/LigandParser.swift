@@ -20,7 +20,9 @@ class LigandParser: ILigandParser {
             return
         }
         let ligandsComponents = parse(ligandStr)
-        if ligandsComponents.atoms.isEmpty || ligandsComponents.connections.isEmpty || ligandsComponents.atoms.count != ligandsComponents.connections.count {
+        let emptyOrIncompeteCondition = ligandsComponents.atoms.isEmpty || ligandsComponents.connections.isEmpty || ligandsComponents.atoms.count != ligandsComponents.connections.count
+        let moreThanOneAtom = ligandsComponents.atoms.count > 1
+        if  moreThanOneAtom && emptyOrIncompeteCondition {
             completion(nil, CustomError.invalidFile)
             return
         }
