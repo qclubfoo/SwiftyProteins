@@ -33,9 +33,9 @@ class TestViewController: UIViewController {
     var light: SCNNode!
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
-        let location: CGPoint = sender.location(in: scnView)
+        let locationView: CGPoint = sender.location(in: scnView)
         //print(location)
-        let hits = scnView.hitTest(location, options: nil)
+        let hits = scnView.hitTest(locationView, options: nil)
         if let tappedNode = hits.first?.node {
             for atom in ligand.atoms {
                 let location = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
@@ -43,13 +43,13 @@ class TestViewController: UIViewController {
                     guard let elements = self.elements else { return }
                     for elementAtom in elements {
                         if atom.type.rawValue.uppercased() == elementAtom.symbol.uppercased() {
-                            print(elementAtom.name)
+                            showAtomInfo(element: elementAtom, location: locationView)
+                            //print(elementAtom.name)
                             return
                         }
                     }
                 }
             }
-            
         }
     }
     
@@ -70,13 +70,29 @@ class TestViewController: UIViewController {
         setCamera()
     }
     
+    func showAtomInfo(element: Element, location: CGPoint) {
+        let atomInfoVC = AtomInformationVC.storyboardInstance()
+        
+        atomInfoVC.modalPresentationStyle = .popover
+        
+        let popOverVC = atomInfoVC.popoverPresentationController
+        popOverVC?.delegate = self
+        popOverVC?.sourceView = self.scnView
+        //popOverVC?.sourceRect = location
+        popOverVC?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
+        atomInfoVC.preferredContentSize = CGSize(width: 200, height: 200)
+        print(atomInfoVC.preferredContentSize)
+        atomInfoVC.element = element
+        self.present(atomInfoVC, animated: true, completion: nil)
+    }
+    
     func setTap() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(oneTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
         tap.numberOfTapsRequired = 2
         scnView.addGestureRecognizer(tap)
     }
     
-    @objc func oneTap() {
+    @objc func doubleTap() {
         print("double tap")
     }
     
@@ -141,9 +157,9 @@ class TestViewController: UIViewController {
     func createOneAtom(atom: Atom) -> SCNNode {
         let radius: CGFloat
         if atom.type == .H {
-            radius = 0.25
-        } else {
             radius = 0.3
+        } else {
+            radius = 0.4
         }
         let geometry = SCNSphere(radius: radius)
         let ball = SCNNode(geometry: geometry)
@@ -284,5 +300,11 @@ extension TestViewController {
 extension SCNVector3 {
     static func == (left: SCNVector3, right: SCNVector3) -> Bool {
         return left.x == right.x && left.y == right.y && left.z == right.z
+    }
+}
+
+extension TestViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }

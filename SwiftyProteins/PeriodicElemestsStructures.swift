@@ -22,7 +22,7 @@ struct PeriodicElemestsStructures: Codable {
 struct Element: Codable {
     let name: String
     let appearance: String?
-    let atomicMass: Double
+    let atomicMass: Double?
     let boil: Double?
     let category: String
     let color: String?
