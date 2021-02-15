@@ -56,6 +56,8 @@ class TestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
         setTap()
         //setView()
         setScene()
@@ -68,6 +70,15 @@ class TestViewController: UIViewController {
         createLinks()
         //setLight()
         setCamera()
+    }
+    
+    // MARK: share - is the method where we should put image of the ligand. It should be provide by SceneKit
+    @objc func share() {
+        if let image = UIImage(named: "logo-1024"),
+            let ligandName = title {
+        let ac = UIActivityViewController(activityItems: [image, "This is \(ligandName) ligand"], applicationActivities: nil)
+        present(ac, animated: true)
+        }
     }
     
     func setTap() {
