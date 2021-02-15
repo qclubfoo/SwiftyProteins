@@ -18,11 +18,19 @@ class ProteinListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let searchController = UISearchController(searchResultsController: nil)
     var model: IProteinModel?
     var ligandManager: ILigandManager?
     var proteinList = [String]()
     var elements = [Element]()
     
+    var filteredLigands = [String]()
+    var isSearchBarEmpty: Bool {
+        searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +43,31 @@ class ProteinListVC: UIViewController {
         if elements.isEmpty {
             model?.getPeriodicTableAtoms()
         }
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search ligands"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredLigands = proteinList.filter { (ligand: String) -> Bool in
+        return ligand.uppercased().contains(searchText.uppercased())
+      }
+      
+      tableView.reloadData()
+    }
+    
+}
+
+extension ProteinListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let inputedText = searchController.searchBar.text {
+            filterContentForSearchText(inputedText)
+        }
+    }
+    
 }
 
 extension ProteinListVC: ProteinListVCDelegate {
@@ -53,12 +85,23 @@ extension ProteinListVC: ProteinListVCDelegate {
 
 extension ProteinListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        proteinList.count
+        
+        if isFiltering {
+          return filteredLigands.count
+        }
+          
+        return proteinList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
-        cell.textLabel?.text = proteinList[indexPath.row]
+        let ligand: String
+        if isFiltering {
+            ligand = filteredLigands[indexPath.row]
+        } else {
+            ligand = proteinList[indexPath.row]
+        }
+        cell.textLabel?.text = ligand
         return cell
     }
     
