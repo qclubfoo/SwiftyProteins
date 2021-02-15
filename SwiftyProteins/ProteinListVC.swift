@@ -17,12 +17,20 @@ class ProteinListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var ligandsDataSwitcher: UISegmentedControl!
+    
+    @IBAction func switcherChangedValue(_ sender: UISegmentedControl) {
+        switcher?.toggle()
+        model?.getProteins(from: switcher?.currentChoice)
+    }
     
     let searchController = UISearchController(searchResultsController: nil)
     var model: IProteinModel?
     var ligandManager: ILigandManager?
     var proteinList = [String]()
     var elements = [Element]()
+    
+    var switcher: ProteinDataSource?
     
     var filteredLigands = [String]()
     var isSearchBarEmpty: Bool {
@@ -37,12 +45,15 @@ class ProteinListVC: UIViewController {
         
         title = "Protein list"
         model?.delegate = self
+        
+        switcher = ProteinDataSource(rawValue: ligandsDataSwitcher.selectedSegmentIndex)
         if proteinList.isEmpty {
-            model?.getProteins()
+            model?.getProteins(from: switcher?.currentChoice)
         }
         if elements.isEmpty {
             model?.getPeriodicTableAtoms()
         }
+        
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -59,6 +70,32 @@ class ProteinListVC: UIViewController {
       tableView.reloadData()
     }
     
+}
+
+extension ProteinListVC {
+    enum ProteinDataSource: Int {
+        case original = 0
+        case extended = 1
+        
+        mutating func toggle() {
+            switch self {
+            case .original:
+                self = .extended
+            case .extended:
+                self = .original
+            }
+
+        }
+        
+        var currentChoice: String {
+            switch self {
+            case .original:
+                return "ligands"
+            case .extended:
+                return "ligands_new"
+            }
+        }
+    }
 }
 
 extension ProteinListVC: UISearchResultsUpdating {
