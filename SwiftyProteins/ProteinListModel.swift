@@ -11,7 +11,7 @@ import Foundation
 protocol IProteinModel {
     var delegate: ProteinListVCDelegate? { get set }
     
-    func getProteins()
+    func getProteins(from file: String?)
     
     func getPeriodicTableAtoms()
 }
@@ -34,15 +34,16 @@ class ProteinModel: IProteinModel {
         }
     }
     
-    func getProteins() {
+    func getProteins(from file: String?) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let path = Bundle.main.path(forResource: "ligands_new", ofType: "txt") else { fatalError("Can't find or open ligands.txt") }
+            guard   let file = file,
+                    let path = Bundle.main.path(forResource: file, ofType: "txt") else { fatalError("Can't find or open source file") }
             do {
                 let fileContent = try String(contentsOfFile: path, encoding: .utf8).dropLast()
                 let proteinList = fileContent.components(separatedBy: "\n")
                 self?.delegate?.updateTableView(withNewData: proteinList)
             } catch {
-                fatalError("Can't find or open ligands.txt")
+                fatalError("Can't find or open source file")
             }
         }
     }

@@ -17,25 +17,94 @@ class ProteinListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var ligandsDataSwitcher: UISegmentedControl!
     
+    @IBAction func switcherChangedValue(_ sender: UISegmentedControl) {
+        switcher?.toggle()
+        model?.getProteins(from: switcher?.currentChoice)
+    }
+    
+    let searchController = UISearchController(searchResultsController: nil)
     var model: IProteinModel?
     var ligandManager: ILigandManager?
     var proteinList = [String]()
     var elements = [Element]()
     
+    var switcher: ProteinDataSource?
+    
+    var filteredLigands = [String]()
+    var isSearchBarEmpty: Bool {
+        searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Protein list"
         model?.delegate = self
+        
+        switcher = ProteinDataSource(rawValue: ligandsDataSwitcher.selectedSegmentIndex)
         if proteinList.isEmpty {
-            model?.getProteins()
+            model?.getProteins(from: switcher?.currentChoice)
         }
         if elements.isEmpty {
             model?.getPeriodicTableAtoms()
         }
+        
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search ligands"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredLigands = proteinList.filter { (ligand: String) -> Bool in
+        return ligand.uppercased().contains(searchText.uppercased())
+      }
+      
+      tableView.reloadData()
+    }
+    
+}
+
+extension ProteinListVC {
+    enum ProteinDataSource: Int {
+        case original = 0
+        case extended = 1
+        
+        mutating func toggle() {
+            switch self {
+            case .original:
+                self = .extended
+            case .extended:
+                self = .original
+            }
+
+        }
+        
+        var currentChoice: String {
+            switch self {
+            case .original:
+                return "ligands"
+            case .extended:
+                return "ligands_new"
+            }
+        }
+    }
+}
+
+extension ProteinListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let inputedText = searchController.searchBar.text {
+            filterContentForSearchText(inputedText)
+        }
+    }
+    
 }
 
 extension ProteinListVC: ProteinListVCDelegate {
@@ -53,12 +122,23 @@ extension ProteinListVC: ProteinListVCDelegate {
 
 extension ProteinListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        proteinList.count
+        
+        if isFiltering {
+          return filteredLigands.count
+        }
+          
+        return proteinList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
-        cell.textLabel?.text = proteinList[indexPath.row]
+        let ligand: String
+        if isFiltering {
+            ligand = filteredLigands[indexPath.row]
+        } else {
+            ligand = proteinList[indexPath.row]
+        }
+        cell.textLabel?.text = ligand
         return cell
     }
     
@@ -97,36 +177,3 @@ extension ProteinListVC {
         return vc
     }
 }
-
-
-/*
-
- 
- extension ProteinListVC: UITableViewDelegate {
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         tableView.allowsSelection = false
-         activityIndicator.startAnimating()
-         for str in proteinList {
-         //ligandManager?.getLigandWith(name: proteinList[indexPath.row]) { ligand, error in
-             ligandManager?.getLigandWith(name: str) { ligand, error in
-             DispatchQueue.main.async { [weak self] in
-                 if let error = error {
-                     print("Error str = \(str)")
-                     //let ac = UIAlertController(title: "Error", message: error.localizedDescription, //preferredStyle: .alert)
-                     //ac.addAction(UIAlertAction(title: "Ok", style: .default))
-                     //self?.present(ac, animated: true)
-                 } else {
-                     //let nextVC = TestViewController.storyboardInstance()
-                     //nextVC.ligand = ligand
-                     //nextVC.title = self?.proteinList[indexPath.row]
-                     //self?.navigationController?.pushViewController(nextVC, animated: true)
-                 }
-                 self?.activityIndicator.stopAnimating()
-                 tableView.allowsSelection = true
-             }
-         }
-         }
-         tableView.deselectRow(at: indexPath, animated: true)
-     }
- }
- */

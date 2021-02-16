@@ -48,10 +48,12 @@
 		008E5CFB25C962A300B293A2 /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
 		008E5CFE25C96C4A00B293A2 /* LigandDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandDownloader.swift; sourceTree = "<group>"; };
 		008E5D0125C9956E00B293A2 /* LigandStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandStructure.swift; sourceTree = "<group>"; };
+
 		290FEA9125D3CCE4008ED027 /* PeriodicElemestsStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicElemestsStructures.swift; sourceTree = "<group>"; };
 		290FEA9425D3D383008ED027 /* PeriodicTableJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PeriodicTableJSON.json; sourceTree = "<group>"; };
 		293C14AE25D525020010C8F5 /* AtomInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomInformationVC.swift; sourceTree = "<group>"; };
 		293C14B225D525330010C8F5 /* AtomInformationVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AtomInformationVC.storyboard; sourceTree = "<group>"; };
+
 		296D5F7225D11A43000D95C5 /* ligands_new.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ligands_new.txt; sourceTree = "<group>"; };
 		2988A9ED25C43CD100EB05A8 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2988A9F025C43E0100EB05A8 /* TestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestViewController.storyboard; sourceTree = "<group>"; };
@@ -148,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				008E5D0125C9956E00B293A2 /* LigandStructure.swift */,
+				0096F57A25D672AE008492EC /* PeriodicElemestsStructures.swift */,
+				0096F57B25D672AE008492EC /* PeriodicTableJSON.json */,
 				0047650225CC1C8600F1A1E4 /* CustomErrors.swift */,
 				290FEA9125D3CCE4008ED027 /* PeriodicElemestsStructures.swift */,
 			);
@@ -229,7 +233,9 @@
 				00879DE825C2E20E00C7DFC3 /* Assets.xcassets in Resources */,
 				2988A9F125C43E0100EB05A8 /* TestViewController.storyboard in Resources */,
 				00879DE625C2E20C00C7DFC3 /* LoginVC.storyboard in Resources */,
+
 				290FEA9525D3D383008ED027 /* PeriodicTableJSON.json in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,14 +405,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SNPDG93FF;
+				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteins;
+				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteinsqclubfoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -418,14 +424,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SNPDG93FF;
+				DEVELOPMENT_TEAM = 6PM6W9L3YQ;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteins;
+				PRODUCT_BUNDLE_IDENTIFIER = widraugr.SwiftyProteinsqclubfoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
