@@ -27,7 +27,7 @@
                             </sceneKitView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7cH-fz-Bs5"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ypX-NS-kZG" firstAttribute="leading" secondItem="7cH-fz-Bs5" secondAttribute="leading" id="0cE-jc-NnR"/>
                             <constraint firstItem="7cH-fz-Bs5" firstAttribute="trailing" secondItem="ypX-NS-kZG" secondAttribute="trailing" id="3nJ-b2-e9z"/>
@@ -50,8 +50,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
