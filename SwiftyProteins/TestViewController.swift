@@ -81,7 +81,6 @@ class TestViewController: UIViewController {
         //popOverVC?.sourceRect = location
         popOverVC?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
         atomInfoVC.preferredContentSize = CGSize(width: 200, height: 200)
-        print(atomInfoVC.preferredContentSize)
         atomInfoVC.element = element
         self.present(atomInfoVC, animated: true, completion: nil)
     }
@@ -100,7 +99,7 @@ class TestViewController: UIViewController {
         scnScene = SCNScene()
         scnView.scene = scnScene
         
-        scnView.showsStatistics = true              // Отображение статичтики
+        //scnView.showsStatistics = true              // Отображение статичтики
         scnView.backgroundColor = .lightGray
         //scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
         scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
