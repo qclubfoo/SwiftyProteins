@@ -54,7 +54,6 @@ class ProteinListVC: UIViewController {
             model?.getPeriodicTableAtoms()
         }
         
-        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search ligands"
@@ -138,6 +137,7 @@ extension ProteinListVC: UITableViewDataSource {
         } else {
             ligand = proteinList[indexPath.row]
         }
+        
         cell.textLabel?.text = ligand
         return cell
     }
@@ -148,17 +148,23 @@ extension ProteinListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.allowsSelection = false
         activityIndicator.startAnimating()
-        ligandManager?.getLigandWith(name: proteinList[indexPath.row]) { ligand, error in
+        let ligandName: String
+        if isFiltering {
+            ligandName = filteredLigands[indexPath.row]
+        } else {
+            ligandName = proteinList[indexPath.row]
+        }
+        ligandManager?.getLigandWith(name: ligandName) { ligand, error in
             DispatchQueue.main.async { [weak self] in
                 if let error = error {
                     let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .default))
                     self?.present(ac, animated: true)
                 } else {
-                    let nextVC = TestViewController.storyboardInstance()
+                    let nextVC = LigandSceneVC.storyboardInstance()
                     nextVC.ligand = ligand
                     nextVC.elements = self?.elements
-                    nextVC.title = self?.proteinList[indexPath.row]
+                    nextVC.title = ligandName
                     self?.navigationController?.pushViewController(nextVC, animated: true)
                 }
                 self?.activityIndicator.stopAnimating()

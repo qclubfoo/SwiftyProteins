@@ -15,7 +15,8 @@ protocol ILigandDownloader {
 class LigandDownloader: ILigandDownloader {
     
     func downloadLigandData(with name: String, completion: @escaping (Data?, Error?) -> ()) {
-        let path = "https://files.rcsb.org/ligands/view/\(name.lowercased())_ideal.pdb"
+        let checkName = name.lowercased().replacingOccurrences(of: " ", with: "")
+        let path = "https://files.rcsb.org/ligands/view/\(checkName)_ideal.pdb"
         guard let url = URL(string: path) else {
             print("Invalid URL")
             completion(nil, CustomError.invalidURL)

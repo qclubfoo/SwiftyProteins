@@ -79,9 +79,10 @@ class LigandParser: ILigandParser {
             }
             arrayConnections.append(tmpArray)
         }
-        if !arrayConnections.isEmpty {
-            return arrayConnections
-        }
-        return nil
+//        if !arrayConnections.isEmpty {
+//            return arrayConnections
+//        }
+        //return nil
+        return arrayConnections
     }
 }

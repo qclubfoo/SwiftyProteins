@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test View Controller-->
+        <!--Ligand SceneVC-->
         <scene sceneID="Tek-Oe-eee">
             <objects>
-                <viewController id="WmI-jO-xLh" customClass="TestViewController" customModule="SwiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WmI-jO-xLh" customClass="LigandSceneVC" customModule="SwiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SaR-rR-pTZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" contentMode="scaleToFill" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypX-NS-kZG">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="WmI-jO-xLh" id="DWd-Zr-w1h"/>
@@ -31,7 +31,7 @@
                         <constraints>
                             <constraint firstItem="ypX-NS-kZG" firstAttribute="leading" secondItem="7cH-fz-Bs5" secondAttribute="leading" id="0cE-jc-NnR"/>
                             <constraint firstItem="7cH-fz-Bs5" firstAttribute="trailing" secondItem="ypX-NS-kZG" secondAttribute="trailing" id="3nJ-b2-e9z"/>
-                            <constraint firstItem="7cH-fz-Bs5" firstAttribute="bottom" secondItem="ypX-NS-kZG" secondAttribute="bottom" id="4gH-Cv-Yux"/>
+                            <constraint firstAttribute="bottom" secondItem="ypX-NS-kZG" secondAttribute="bottom" id="4gH-Cv-Yux"/>
                             <constraint firstItem="ypX-NS-kZG" firstAttribute="top" secondItem="7cH-fz-Bs5" secondAttribute="top" id="YSB-Kq-Xii"/>
                         </constraints>
                     </view>

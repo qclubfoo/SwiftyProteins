@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class TestViewController: UIViewController {
+class LigandSceneVC: UIViewController {
     
     @IBOutlet var scnView: SCNView!
     
@@ -79,6 +79,7 @@ class TestViewController: UIViewController {
         let ac = UIActivityViewController(activityItems: [image, "This is \(ligandName) ligand"], applicationActivities: nil)
         present(ac, animated: true)
         }
+    }
 
     func showAtomInfo(element: Element, location: CGPoint) {
         let atomInfoVC = AtomInformationVC.storyboardInstance()
@@ -298,11 +299,11 @@ class TestViewController: UIViewController {
     }
 }
 
-extension TestViewController {
-    static func storyboardInstance() -> TestViewController {
+extension LigandSceneVC {
+    static func storyboardInstance() -> LigandSceneVC {
         let storyboardName = String(describing: self)
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        guard let vc = storyboard.instantiateInitialViewController() as? TestViewController else { fatalError("LoginVC doesn't exist") }
+        guard let vc = storyboard.instantiateInitialViewController() as? LigandSceneVC else { fatalError("LoginVC doesn't exist") }
         return vc
     }
 }
@@ -313,7 +314,7 @@ extension SCNVector3 {
     }
 }
 
-extension TestViewController: UIPopoverPresentationControllerDelegate {
+extension LigandSceneVC: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
