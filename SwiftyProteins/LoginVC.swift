@@ -10,7 +10,9 @@ import UIKit
 import LocalAuthentication
 
 class LoginVC: UIViewController {
-
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
     @IBAction func pressSignIn(_ sender: UIButton) {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) {
@@ -27,6 +29,13 @@ class LoginVC: UIViewController {
         } else {
             print("Not biometry")
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loginButton.layer.cornerRadius = 10
+        loginButton.layer.borderWidth = 2
     }
 }
 

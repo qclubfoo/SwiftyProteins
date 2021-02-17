@@ -15,9 +15,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="loginBackgroundd — копия" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-Ge-W4Y">
+                                <rect key="frame" x="0.0" y="75" width="414" height="787"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uc5-mO-AhA">
                                 <rect key="frame" x="0.0" y="75" width="414" height="787"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="basicCell" textLabel="LPd-No-Csz" style="IBUITableViewCellStyleDefault" id="hk7-Ba-94T">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -35,6 +38,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -62,8 +66,12 @@
                             <constraint firstItem="zm9-PI-eig" firstAttribute="bottom" secondItem="Uc5-mO-AhA" secondAttribute="bottom" id="MnS-ye-ELi"/>
                             <constraint firstItem="zm9-PI-eig" firstAttribute="trailing" secondItem="Uc5-mO-AhA" secondAttribute="trailing" id="Nbq-k5-blI"/>
                             <constraint firstItem="d2u-GH-gOZ" firstAttribute="centerY" secondItem="djN-mc-bmW" secondAttribute="centerY" id="NrH-Jz-X4X"/>
+                            <constraint firstItem="bKE-Ge-W4Y" firstAttribute="leading" secondItem="Uc5-mO-AhA" secondAttribute="leading" id="Q5i-t1-WoN"/>
+                            <constraint firstItem="bKE-Ge-W4Y" firstAttribute="trailing" secondItem="Uc5-mO-AhA" secondAttribute="trailing" id="Uqg-bB-ZmA"/>
+                            <constraint firstItem="bKE-Ge-W4Y" firstAttribute="top" secondItem="Uc5-mO-AhA" secondAttribute="top" id="aCi-b8-9EX"/>
                             <constraint firstItem="Uc5-mO-AhA" firstAttribute="leading" secondItem="zm9-PI-eig" secondAttribute="leading" id="m0j-E4-7ST"/>
                             <constraint firstItem="Yhp-wT-ktx" firstAttribute="top" secondItem="zm9-PI-eig" secondAttribute="top" id="mPw-7k-QXr"/>
+                            <constraint firstItem="bKE-Ge-W4Y" firstAttribute="bottom" secondItem="Uc5-mO-AhA" secondAttribute="bottom" id="r7R-lH-uMR"/>
                             <constraint firstItem="Yhp-wT-ktx" firstAttribute="leading" secondItem="zm9-PI-eig" secondAttribute="leading" id="vNn-eQ-M3F"/>
                             <constraint firstItem="d2u-GH-gOZ" firstAttribute="centerX" secondItem="djN-mc-bmW" secondAttribute="centerX" id="z1Q-7i-L36"/>
                             <constraint firstItem="Uc5-mO-AhA" firstAttribute="top" secondItem="Yhp-wT-ktx" secondAttribute="bottom" id="z6x-w6-P3d"/>
@@ -72,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="d2u-GH-gOZ" id="lbM-4n-ZdI"/>
+                        <outlet property="appLogo" destination="bKE-Ge-W4Y" id="03E-4h-Zbe"/>
                         <outlet property="ligandsDataSwitcher" destination="Yhp-wT-ktx" id="P85-6Z-k4I"/>
                         <outlet property="tableView" destination="Uc5-mO-AhA" id="2Yd-gi-AIl"/>
                     </connections>
@@ -81,4 +90,7 @@
             <point key="canvasLocation" x="-30.434782608695656" y="0.0"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="loginBackgroundd — копия" width="445" height="900"/>
+    </resources>
 </document>

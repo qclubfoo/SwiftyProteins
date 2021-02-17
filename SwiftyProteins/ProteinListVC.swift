@@ -18,6 +18,7 @@ class ProteinListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ligandsDataSwitcher: UISegmentedControl!
+    @IBOutlet weak var appLogo: UIImageView!
     
     @IBAction func switcherChangedValue(_ sender: UISegmentedControl) {
         switcher?.toggle()
@@ -42,6 +43,10 @@ class ProteinListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIView.animate(withDuration: 0.75, animations: { [weak self] in
+            self?.appLogo.alpha = 0.15
+        })
         
         title = "Protein list"
         model?.delegate = self
