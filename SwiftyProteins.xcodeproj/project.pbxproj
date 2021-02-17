@@ -72,8 +72,6 @@
 			children = (
 				00879DE225C2E20C00C7DFC3 /* LoginVC.swift */,
 				00879DE425C2E20C00C7DFC3 /* LoginVC.storyboard */,
-				2988A9ED25C43CD100EB05A8 /* LigandSceneVC.swift */,
-				2988A9F025C43E0100EB05A8 /* LigandSceneVC.storyboard */,
 			);
 			name = LoginVC;
 			sourceTree = "<group>";
@@ -156,6 +154,8 @@
 			children = (
 				293C14AE25D525020010C8F5 /* AtomInformationVC.swift */,
 				293C14B225D525330010C8F5 /* AtomInformationVC.storyboard */,
+				2988A9ED25C43CD100EB05A8 /* LigandSceneVC.swift */,
+				2988A9F025C43E0100EB05A8 /* LigandSceneVC.storyboard */,
 			);
 			path = LigandsVC;
 			sourceTree = "<group>";

@@ -14,37 +14,28 @@ class LigandSceneVC: UIViewController {
     
     @IBOutlet var scnView: SCNView!
     
-    var scnScene: SCNScene!
+    var scnScene = SCNScene()
+    var cameraNode = SCNNode()
+    var centralNode = SCNNode()
+    var atomsNods = [SCNNode]()
     
-    var cameraNode: SCNNode!
-    
-    var firstObject: SCNNode!
-    var ball: SCNNode!
-    
-    var ligand: Ligand!
-    
-    var left = Bool()
-
-    var atomsNods: [SCNNode]!
+    var ligand: Ligand?
     var elements: [Element]?
-    
-    var centralNode: SCNNode!
-    
-    var light: SCNNode!
     
     @IBAction func tap(_ sender: UITapGestureRecognizer) {
         let locationView: CGPoint = sender.location(in: scnView)
-        //print(location)
         let hits = scnView.hitTest(locationView, options: nil)
+    
+        guard let ligand = self.ligand else { return }
+        guard let elements = self.elements else { return }
+        
         if let tappedNode = hits.first?.node {
             for atom in ligand.atoms {
                 let location = SCNVector3Make(atom.coordinates.x, atom.coordinates.y, atom.coordinates.z)
                 if location == tappedNode.position {
-                    guard let elements = self.elements else { return }
                     for elementAtom in elements {
                         if atom.type.rawValue.uppercased() == elementAtom.symbol.uppercased() {
                             showAtomInfo(element: elementAtom, location: locationView)
-                            //print(elementAtom.name)
                             return
                         }
                     }
@@ -53,22 +44,14 @@ class LigandSceneVC: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
         setTap()
-        //setView()
         setScene()
-        //createObject()
-        //createPlane()
-        //createBall()
-        //createCylinder()
         createCentreNode()
         createAtoms()
         createLinks()
-        //setLight()
         setCamera()
     }
     
@@ -76,25 +59,22 @@ class LigandSceneVC: UIViewController {
     @objc func share() {
         let image = self.scnView.snapshot()
         if let ligandName = title {
-        let ac = UIActivityViewController(activityItems: [image, "This is \(ligandName) ligand"], applicationActivities: nil)
-        present(ac, animated: true)
+            let ac = UIActivityViewController(activityItems: [image, "This is \(ligandName) ligand"], applicationActivities: nil)
+            present(ac, animated: true)
         }
     }
 
+    // MARK: Show custom popup.
     func showAtomInfo(element: Element, location: CGPoint) {
         let atomInfoVC = AtomInformationVC.storyboardInstance()
-        
         atomInfoVC.modalPresentationStyle = .popover
-        
         let popOverVC = atomInfoVC.popoverPresentationController
         popOverVC?.delegate = self
         popOverVC?.sourceView = self.scnView
-        //popOverVC?.sourceRect = location
         popOverVC?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
         atomInfoVC.preferredContentSize = CGSize(width: 200, height: 200)
         atomInfoVC.element = element
         self.present(atomInfoVC, animated: true, completion: nil)
-
     }
     
     func setTap() {
@@ -108,23 +88,17 @@ class LigandSceneVC: UIViewController {
     }
     
     func setScene() {
-        scnScene = SCNScene()
         scnView.scene = scnScene
-        
-        //scnView.showsStatistics = true              // Отображение статичтики
         scnView.backgroundColor = .lightGray
-        //scnView.allowsCameraControl = true          // Разрешение на ручное взаимодействие с объектом
         scnView.autoenablesDefaultLighting = true   // Атоматическое добавление источника света.
     }
     
     func createCentreNode() {
-        centralNode = SCNNode()
         centralNode.position = SCNVector3Make(0, 0, 0)
         scnScene.rootNode.addChildNode(centralNode)
     }
     
     func setCamera() {
-        cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.usesOrthographicProjection = true
         cameraNode.camera?.orthographicScale = 15
@@ -134,32 +108,11 @@ class LigandSceneVC: UIViewController {
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    func createObject() {
-        firstObject = SCNNode()
-        let geometry = SCNBox(width: 1, height: 1.5, length: 1, chamferRadius: 0)
-        firstObject.geometry = geometry
-        let material = SCNMaterial()
-        //material.diffuse.contents = UIColor(red: 1.0, green: 0.7, blue: 0, alpha: 1)
-        firstObject.geometry?.materials = [material]
-        firstObject.position = SCNVector3Make(0, 0, 0)
-        scnScene.rootNode.addChildNode(firstObject)
-    }
     
-    func createBall() {
-        let geometry = SCNSphere(radius: 0.3)
-        ball = SCNNode(geometry: geometry)
-        let material = SCNMaterial()
-        //material.diffuse.contents = UIColor.red
-        ball.geometry?.materials = [material]
-        ball.position = SCNVector3Make(1, 0, 1)
-        scnScene.rootNode.addChildNode(ball)
-        
-    }
-    
+    // MARK: Create atoms and add to scene.
     func createAtoms() {
-        //let atoms = Atom.allAtoms()
+        guard let ligand = self.ligand else { return }
         let atoms = ligand.atoms
-        atomsNods = [SCNNode]()
         for atom in atoms {
             atomsNods.append(createOneAtom(atom: atom))
         }
@@ -235,6 +188,7 @@ class LigandSceneVC: UIViewController {
         return collor
     }
     
+    // MARK: Create links atoms
     func creationOneLink(from: SCNNode, to: SCNNode) {
         let positionOne = from.position
         let positionTwo = to.position
@@ -242,7 +196,6 @@ class LigandSceneVC: UIViewController {
         let height = CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(positionOne), SCNVector3ToGLKVector3(positionTwo)))
         let zNode = SCNNode()
         zNode.eulerAngles.x = Float(Double.pi / 2.0)
-        
         
         let geometry =  SCNCylinder(radius: 0.1, height: height)
         let material = SCNMaterial()
@@ -256,14 +209,13 @@ class LigandSceneVC: UIViewController {
         zNode.addChildNode(cylinder)
         let newNode = SCNNode()
         newNode.position = to.position
-        //to.addChildNode(zNode)
-        //to.constraints = [ SCNLookAtConstraint(target: from) ]
         newNode.addChildNode(zNode)
         newNode.constraints = [ SCNLookAtConstraint(target: from) ]
         scnScene.rootNode.addChildNode(newNode)
     }
     
     func createLinks() {
+        guard let ligand = self.ligand else { return }
         let connections = ligand.connections
         for (i, numbersAtoms) in connections.enumerated(){
             for n in numbersAtoms {
@@ -274,31 +226,9 @@ class LigandSceneVC: UIViewController {
             }
         }
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-//        if left == false {
-//            ball.removeAllActions()
-//            // бесконечно двигаем шарик по координате X со скоростью 5, длительностью 20 мс
-//            ball.runAction(.repeatForever(.move(by: SCNVector3Make(-5, 0, 0), duration: 20)))
-//            left = true
-//        } else {
-//            ball.removeAllActions()
-//            // бесконечно двигаем шарик по координате Y со скоростью 5, длительностью 20 мс
-//            ball.runAction(.repeatForever(.move(by: SCNVector3Make(0, -5, 0), duration: 20)))
-//            left = false
-//        }
-    }
-    
-    
-    deinit {
-        print("Deinit TestViewController")
-    }
 }
 
+// MARK: Extension
 extension LigandSceneVC {
     static func storyboardInstance() -> LigandSceneVC {
         let storyboardName = String(describing: self)
