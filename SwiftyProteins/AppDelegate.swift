@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         proteinListVC.model = ProteinModel()
         proteinListVC.ligandManager = LigandManager()
         let navController = UINavigationController(rootViewController: proteinListVC)
+        navController.navigationBar.tintColor = .black
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         showLoginVC()

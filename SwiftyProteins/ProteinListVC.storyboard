@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="loginBackgroundd — копия" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-Ge-W4Y">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="loginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="bKE-Ge-W4Y">
                                 <rect key="frame" x="0.0" y="75" width="414" height="787"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uc5-mO-AhA">
@@ -80,9 +80,9 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="d2u-GH-gOZ" id="lbM-4n-ZdI"/>
-                        <outlet property="appLogo" destination="bKE-Ge-W4Y" id="03E-4h-Zbe"/>
                         <outlet property="ligandsDataSwitcher" destination="Yhp-wT-ktx" id="P85-6Z-k4I"/>
                         <outlet property="tableView" destination="Uc5-mO-AhA" id="2Yd-gi-AIl"/>
+                        <outlet property="viewBackgroundImageView" destination="bKE-Ge-W4Y" id="03E-4h-Zbe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmc-Qv-A5y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -91,6 +91,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="loginBackgroundd — копия" width="445" height="900"/>
+        <image name="loginBackground" width="445" height="900"/>
     </resources>
 </document>
